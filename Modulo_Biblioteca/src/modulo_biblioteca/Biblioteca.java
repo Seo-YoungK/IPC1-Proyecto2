@@ -360,9 +360,9 @@ public class Biblioteca extends javax.swing.JFrame {
     private void AgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarMouseClicked
       String categorias = JOptionPane.showInputDialog(null,"Nombra tu categoría");
       
-          Lista_Doble lista = new Lista_Doble();
+          Lista_Simple_Categorias lista = new Lista_Simple_Categorias();
           modeloLista.addElement(categorias);
-          lista.add((String)categorias);
+          lista.agregar(categorias);
     }//GEN-LAST:event_AgregarMouseClicked
 
     private void eliminarcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarcategoriaMouseClicked
