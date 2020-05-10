@@ -6,6 +6,7 @@
 package modulo_biblioteca;
 
 import java.awt.Image;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,24 +14,111 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author karen
  */
 public class Panel_Editor extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Panel_Convertidor
-     */
+    
+    private BufferedImage input;
+    private BufferedImage output;
+    private BufferedImage segundoinput;
+    private File seleccion; 
+    
+    private int R[][];
+    private int G[][];
+    private int B[][];
+    
+    private int monocromatico[][];
+    
+    private int height;
+    private int width;
+    
     public Panel_Editor() {
         initComponents();
         this.setLocationRelativeTo(null);
         botones.add(opc_1);
-        botones.add(opc_2);
+        botones.add(op2);
         botones.add(opc_3);
+        botones2.add(op1);
+        botones2.add(op2);
     }
 
+    /*INICIO DE METODOS DE TRANSFORMACION*/
+    /*Metodo para transformar imagene en blanco y negro*/
+    
+
+    public void seleccionar() throws IOException{
+    
+        JFileChooser imagen = new JFileChooser();
+        imagen.setDialogTitle("Buscar en:" );
+        FileNameExtensionFilter filtroimagen = new FileNameExtensionFilter("JPG, bmp");
+        imagen.setFileFilter(filtroimagen);
+        int estado = imagen.showOpenDialog(null);
+        
+
+        if(estado== JFileChooser.APPROVE_OPTION){
+              if(input == null){
+              seleccion = imagen.getSelectedFile();
+              input = ImageIO.read(seleccion);
+              height = input.getHeight();
+              width = input.getWidth();
+          }  
+              seleccion = imagen.getSelectedFile();
+              segundoinput = ImageIO.read(seleccion);
+        }
+        
+    }    
+
+    public BufferedImage getinput(){
+        return input;
+    
+    }
+    
+    
+    
+    
+    public void blanco_y_negro(File imag){
+        int mediaPixel;
+        Color colorAux; 
+         seleccionar();
+          
+         monocromatico = new int[width][height];
+         R = new int[width][height];
+         G = new int[width][height];
+         B = new int[width][height];
+         
+         
+          for(int x=0; x < width; x++){
+             for(int y=0; y< height; y++){
+              colorAux = new color   
+              Color color = new Color(imagen.getRGB(x, y));
+              int rojo = (int)(color.getRed()*0.2126);
+              int verde = (int)(color.getGreen()*0.7152);  
+              int azul = (int)(color.getBlue()*0.07122);
+              int total = rojo + verde + azul;  
+                 
+              Color monocromatico = new Color(total, total, total);
+              imagen.setRGB(x, y, monocromatico.getRGB());
+             }
+              
+          }
+           
+          
+          try{
+               f= new File("C:\\Users\\karen\\Pictures\\Output.jpg");
+               ImageIO.write(imag, "jpg", f);
+          
+            }catch(IOException ex){  
+               ex.printStackTrace();
+            } 
+
+       }
+
+        
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,17 +130,24 @@ public class Panel_Editor extends javax.swing.JFrame {
 
         jLabel5 = new javax.swing.JLabel();
         botones = new javax.swing.ButtonGroup();
+        botones2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lugarimagen = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         seleccionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        opc_2 = new javax.swing.JRadioButton();
+        op2 = new javax.swing.JRadioButton();
         opc_1 = new javax.swing.JRadioButton();
         opc_3 = new javax.swing.JRadioButton();
         Convertir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        op1 = new javax.swing.JRadioButton();
+        opc_4 = new javax.swing.JRadioButton();
+        Convertir2 = new javax.swing.JButton();
 
         jLabel5.setBackground(new java.awt.Color(51, 51, 51));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -65,7 +160,6 @@ public class Panel_Editor extends javax.swing.JFrame {
 
         lugarimagen.setBackground(new java.awt.Color(255, 255, 255));
         lugarimagen.setForeground(new java.awt.Color(255, 255, 255));
-        lugarimagen.setText("jLabel1");
         lugarimagen.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -80,24 +174,19 @@ public class Panel_Editor extends javax.swing.JFrame {
         });
 
         jLabel1.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Elija el formato para convertir");
-
-        jLabel6.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Blanco y Negro");
+        jLabel1.setText("Instrucciones");
 
         jLabel7.setBackground(new java.awt.Color(51, 51, 51));
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Modificar Imagen");
 
-        opc_2.setBackground(new java.awt.Color(51, 51, 51));
-        opc_2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        opc_2.setForeground(new java.awt.Color(255, 255, 255));
-        opc_2.setText("     Convertir BMP a JPGE");
+        op2.setBackground(new java.awt.Color(51, 51, 51));
+        op2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        op2.setForeground(new java.awt.Color(255, 255, 255));
+        op2.setText("     Rojo, Verde y Azul");
 
         opc_1.setBackground(new java.awt.Color(51, 51, 51));
         opc_1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -116,77 +205,136 @@ public class Panel_Editor extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("1. Convierte la imagen de JPGE A BMP");
+
+        jLabel4.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("2. Si la imagen es BMP conviertela a JPGE");
+
+        jLabel8.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("copia de la imagen modificada. ");
+
+        jLabel9.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("3. Presiona copiar imagen, si quieres realizar una ");
+
+        op1.setBackground(new java.awt.Color(51, 51, 51));
+        op1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        op1.setForeground(new java.awt.Color(255, 255, 255));
+        op1.setText("     Blanco y Negro");
+
+        opc_4.setBackground(new java.awt.Color(51, 51, 51));
+        opc_4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        opc_4.setForeground(new java.awt.Color(255, 255, 255));
+        opc_4.setText("     Convertir BMP a JPGE");
+
+        Convertir2.setText("Convertir");
+        Convertir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Convertir2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addComponent(seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(opc_3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(opc_2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Convertir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(107, Short.MAX_VALUE))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(143, 143, 143))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(426, Short.MAX_VALUE)
-                    .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(106, 106, 106)))
+                                .addComponent(Convertir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(114, 114, 114))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(93, 93, 93))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(11, 11, 11)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(21, 21, 21)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(opc_3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(opc_4, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(82, 82, 82)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Convertir2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(op2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(op1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Convertir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17)
+                        .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(opc_2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(opc_4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(opc_3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
+                        .addGap(18, 18, 18)
+                        .addComponent(Convertir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
                         .addComponent(jLabel7)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(seleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(130, 130, 130)
-                    .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(399, Short.MAX_VALUE)))
+                        .addGap(27, 27, 27)
+                        .addComponent(op1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(op2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Convertir2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,50 +352,44 @@ public class Panel_Editor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
-        JFileChooser imagen = new JFileChooser();
-        imagen.setDialogTitle("Buscar en:" );
-        
-        if(imagen.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+
+        try {
+            seleccionar();
+            this.lugarimagen.setIcon(new ImageIcon(this.getinput()));
+            /*input = ImageIO.read(new File(input.getSelectedFile().toString()));*/
+            /*ImageIcon n = new ImageIcon(input);     
+            ImageIcon l = new ImageIcon(n.getImage().getScaledInstance(lugarimagen.getWidth(), lugarimagen.getHeight(), Image.SCALE_DEFAULT));
+            this.lugarimagen.setIcon(l);*/
+             
+        }catch(IOException e){    
+            e.printStackTrace();
+        }
+
+
+
 
           
-        BufferedImage imag =  null;
-        
-        try {
-            
-            imag = ImageIO.read(new File(imagen.getSelectedFile().toString()));
-            
-        }catch(IOException e){    
-            
-        }
-
-        ImageIcon n = new ImageIcon(imag);     
-        ImageIcon l = new ImageIcon(n.getImage().getScaledInstance(lugarimagen.getWidth(), lugarimagen.getHeight(), Image.SCALE_DEFAULT));
-        this.lugarimagen.setIcon(l);
-
-        }
     }//GEN-LAST:event_seleccionarActionPerformed
 
     private void ConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvertirActionPerformed
            
-            String mensaje;
+        String mensaje;
             
             try{
-            if (opc_1.isSelected()){
+                 if (opc_1.isSelected()){
                
-            mensaje = "convertir de JPGE A BMP";     
+                 mensaje = "convertir de JPGE A BMP";     
     
-            }else if (opc_2.isSelected()){
+                 }else if (op2.isSelected()){
                 
-            mensaje = "convertir de  BMP a JPGE";
+                 mensaje = "convertir de  BMP a JPGE";
             
-            }else if (opc_3.isSelected()) {
+                 }else if (opc_3.isSelected()) {
             
-            mensaje = "copiar";
-            }
-            
-            else{
-            mensaje = "no selecciono nada";  
-                
+                  mensaje = "copiar";
+                 }else{
+                 mensaje = "no selecciono nada"; 
+
             }
             
             JOptionPane.showMessageDialog(null, mensaje);
@@ -259,6 +401,39 @@ public class Panel_Editor extends javax.swing.JFrame {
             }
               
     }//GEN-LAST:event_ConvertirActionPerformed
+
+    private void Convertir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Convertir2ActionPerformed
+                   
+        String mensaje2;
+            
+            try{
+                 if (op1.isSelected()){
+               
+                  //mensaje2 = "blanco y negro";     
+                  blanco_y_negro();
+    
+                 }else if (op2.isSelected()){
+                
+                  //mensaje2 = "rojo, verde y azul";
+            
+                 /*}else if (opc_3.isSelected()) {
+            
+                  // mensaje2 = "copiar";*/
+                  
+                  
+                 }else{
+                 // mensaje2 = "no selecciono nada"; 
+
+            }
+            
+            //JOptionPane.showMessageDialog(null, mensaje2);
+            
+            } catch(Exception e){
+             
+                JOptionPane.showMessageDialog(null, "Seleccione una opcion");
+            
+            } 
+    }//GEN-LAST:event_Convertir2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,17 +473,24 @@ public class Panel_Editor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Convertir;
+    private javax.swing.JButton Convertir2;
     private javax.swing.ButtonGroup botones;
+    private javax.swing.ButtonGroup botones2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lugarimagen;
+    private javax.swing.JRadioButton op1;
+    private javax.swing.JRadioButton op2;
     private javax.swing.JRadioButton opc_1;
-    private javax.swing.JRadioButton opc_2;
     private javax.swing.JRadioButton opc_3;
+    private javax.swing.JRadioButton opc_4;
     private javax.swing.JButton seleccionar;
     // End of variables declaration//GEN-END:variables
 }
