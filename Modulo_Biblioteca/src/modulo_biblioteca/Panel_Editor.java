@@ -6,9 +6,12 @@
 package modulo_biblioteca;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -53,8 +56,6 @@ public class Panel_Editor extends javax.swing.JFrame {
     
         JFileChooser imagen = new JFileChooser();
         imagen.setDialogTitle("Buscar en:" );
-        FileNameExtensionFilter filtroimagen = new FileNameExtensionFilter("JPG, bmp");
-        imagen.setFileFilter(filtroimagen);
         int estado = imagen.showOpenDialog(null);
         
 
@@ -68,7 +69,7 @@ public class Panel_Editor extends javax.swing.JFrame {
               seleccion = imagen.getSelectedFile();
               segundoinput = ImageIO.read(seleccion);
         }
-            blanco_y_negro();
+            
     }    
 
     public BufferedImage getinput(){
@@ -80,7 +81,7 @@ public class Panel_Editor extends javax.swing.JFrame {
     public void blanco_y_negro() throws IOException{
         int resultado;
         Color colorAux; 
-        /*seleccionar();*/
+        
           
          monocromatico = new int[width][height];
          R = new int[width][height];
@@ -94,15 +95,20 @@ public class Panel_Editor extends javax.swing.JFrame {
               R[x][y]= colorAux.getRed();
               G[x][y]= colorAux.getGreen();
               B[x][y]= colorAux.getBlue();
-              resultado= (int)((colorAux.getRed()*0.3) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0.11));
+              resultado= (int)((colorAux.getRed()*0.3) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0.11))/3;
+              int RGB = resultado<<16 | resultado<<8 | resultado;
               monocromatico [x][y] = resultado;
 
+              
+              input.setRGB(x, y, RGB );
             }
         }
+         
+        
            
     }
     
-    public void crearimagen(int [][] Imagen, int x, int y){
+  /*  public void crearimagen(int [][] Imagen, int x, int y){
         
          try {
              output = new BufferedImage(x,y, input.getType());
@@ -113,13 +119,14 @@ public class Panel_Editor extends javax.swing.JFrame {
                  }
             }
     
-         }catch(Exception ex){    
+
+         }catch(IOException ex){    
            
         }     
  
-    }
+    }*/
     
-      public BufferedImage getoutput(){
+    /* public BufferedImage getoutput(){
         return output;    
     }  
 
@@ -155,13 +162,15 @@ public class Panel_Editor extends javax.swing.JFrame {
         return monocromatico;
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
+    @Override
     public int getWidth() {
         return width;
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -395,6 +404,9 @@ public class Panel_Editor extends javax.swing.JFrame {
         try{
             
           seleccionar();
+          ImageIcon n = new ImageIcon(input);     
+          ImageIcon l = new ImageIcon(n.getImage().getScaledInstance(lugarimagen.getWidth(), lugarimagen.getHeight(), Image.SCALE_DEFAULT));
+          this.lugarimagen.setIcon(l);
         
         }catch(IOException ex){
         
@@ -405,8 +417,7 @@ public class Panel_Editor extends javax.swing.JFrame {
     private void ConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvertirActionPerformed
            
         String mensaje;
-            
-            try{
+
                  if (opc_1.isSelected()){
                
                  mensaje = "convertir de JPGE A BMP";     
@@ -419,18 +430,10 @@ public class Panel_Editor extends javax.swing.JFrame {
             
                   mensaje = "copiar";
                  }else{
-                 mensaje = "no selecciono nada"; 
+                 JOptionPane.showMessageDialog(null,"Seleccione una opcion");
 
             }
             
-            JOptionPane.showMessageDialog(null, mensaje);
-            
-            } catch(Exception e){
-             
-                JOptionPane.showInputDialog("Seleccione una opcion");
-            
-            }
-              
     }//GEN-LAST:event_ConvertirActionPerformed
 
     private void Convertir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Convertir2ActionPerformed
@@ -438,26 +441,32 @@ public class Panel_Editor extends javax.swing.JFrame {
         String mensaje2;
             
 
-                 if (op1.isSelected()){
+            if (op1.isSelected()){
                
-                  //mensaje2 = "blanco y negro";     
+            try {
+                blanco_y_negro();
+                seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\output.jpg");
+                ImageIO.write(input, "jpg", seleccion);
+                
+                
+             }catch (IOException ex) {
+                Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
                  
     
-                 }else if (op2.isSelected()){
+            }else if (op2.isSelected()){
                 
                   //mensaje2 = "rojo, verde y azul";
             
-                 /*}else if (opc_3.isSelected()) {
+            }else if (opc_3.isSelected()) {
             
-                  // mensaje2 = "copiar";*/
+                  // mensaje2 = "copiar";
                   
                   
-                 }else{
-                 // mensaje2 = "no selecciono nada"; 
+            }else{
+                 JOptionPane.showMessageDialog(null, "Seleccione una opcion");
 
-                }
-            
-
+            }
     }//GEN-LAST:event_Convertir2ActionPerformed
 
     /**
