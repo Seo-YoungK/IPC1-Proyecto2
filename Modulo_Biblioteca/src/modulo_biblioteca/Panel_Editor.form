@@ -105,7 +105,7 @@
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Component id="opc_3" min="-2" pref="291" max="-2" attributes="0"/>
                                                   <Component id="opc_1" alignment="1" min="-2" pref="291" max="-2" attributes="0"/>
-                                                  <Component id="opc_4" alignment="1" min="-2" pref="291" max="-2" attributes="0"/>
+                                                  <Component id="opc_2" alignment="1" min="-2" pref="291" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jLabel7" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
@@ -155,7 +155,7 @@
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="opc_1" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="opc_4" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="opc_2" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="opc_3" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -354,7 +354,7 @@
             <Property name="text" type="java.lang.String" value="     Blanco y Negro"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="opc_4">
+        <Component class="javax.swing.JRadioButton" name="opc_2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>

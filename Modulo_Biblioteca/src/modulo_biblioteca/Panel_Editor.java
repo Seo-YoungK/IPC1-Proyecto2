@@ -42,7 +42,7 @@ public class Panel_Editor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         botones.add(opc_1);
-        botones.add(op2);
+        botones.add(opc_2);
         botones.add(opc_3);
         botones2.add(op1);
         botones2.add(op2);
@@ -194,6 +194,20 @@ public class Panel_Editor extends javax.swing.JFrame {
          
     }     
      
+     public void JPGE_BMP() throws IOException{
+   
+        seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\BMP.bmp"); //ruta donde se colocara la imagen
+        ImageIO.write(input, "bmp", seleccion);       
+
+     }
+     
+     public void BMP_JPGE() throws IOException{
+   
+        seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\JPGE.jpg"); //ruta donde se colocara la imagen
+        ImageIO.write(input, "jpg", seleccion);       
+
+     }
+          
      
      
      
@@ -224,7 +238,7 @@ public class Panel_Editor extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         op1 = new javax.swing.JRadioButton();
-        opc_4 = new javax.swing.JRadioButton();
+        opc_2 = new javax.swing.JRadioButton();
         Convertir2 = new javax.swing.JButton();
 
         jLabel5.setBackground(new java.awt.Color(51, 51, 51));
@@ -308,10 +322,10 @@ public class Panel_Editor extends javax.swing.JFrame {
         op1.setForeground(new java.awt.Color(255, 255, 255));
         op1.setText("     Blanco y Negro");
 
-        opc_4.setBackground(new java.awt.Color(51, 51, 51));
-        opc_4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        opc_4.setForeground(new java.awt.Color(255, 255, 255));
-        opc_4.setText("     Convertir BMP a JPGE");
+        opc_2.setBackground(new java.awt.Color(51, 51, 51));
+        opc_2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        opc_2.setForeground(new java.awt.Color(255, 255, 255));
+        opc_2.setText("     Convertir BMP a JPGE");
 
         Convertir2.setText("Convertir");
         Convertir2.addActionListener(new java.awt.event.ActionListener() {
@@ -359,7 +373,7 @@ public class Panel_Editor extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(opc_3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(opc_4, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(opc_2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(82, 82, 82)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -395,7 +409,7 @@ public class Panel_Editor extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(opc_4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(opc_2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(opc_3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -443,18 +457,32 @@ public class Panel_Editor extends javax.swing.JFrame {
            
         String mensaje;
 
-                 if (opc_1.isSelected()){
+            if (opc_1.isSelected()){
                
-                 mensaje = "convertir de JPGE A BMP";     
-    
-                 }else if (op2.isSelected()){
+                try {    
+                    JPGE_BMP();
+                }
                 
-                 mensaje = "convertir de  BMP a JPGE";
+                catch (IOException ex) {
+                    Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             
-                 }else if (opc_3.isSelected()) {
             
-                  mensaje = "copiar";
-                 }else{
+            }else if (opc_2.isSelected()){
+                
+                 try {
+                    BMP_JPGE();
+                }
+                 
+                 catch (IOException ex) {
+                    Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                  JOptionPane.showMessageDialog(null, "Operacion Finalizada");
+            
+            }else if (opc_3.isSelected()) {
+
+            }else{
                  JOptionPane.showMessageDialog(null,"Seleccione una opcion");
 
             }
@@ -463,9 +491,6 @@ public class Panel_Editor extends javax.swing.JFrame {
 
     private void Convertir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Convertir2ActionPerformed
                    
-        String mensaje2;
-            
-
          if (op1.isSelected()){
                
             try {
@@ -481,7 +506,7 @@ public class Panel_Editor extends javax.swing.JFrame {
     
         }else if (op2.isSelected()){
                 
-            /*try {
+            try {
                 verde();  //metodo para obtener la imagen en verde
             } catch (IOException ex) {
                  Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
@@ -491,7 +516,7 @@ public class Panel_Editor extends javax.swing.JFrame {
                 azul(); //metodo para obtener la imagen en azul
             } catch (IOException ex) {
                 Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
-                 }*/
+                 }
                  
             try {
                 rojo();
@@ -566,8 +591,8 @@ public class Panel_Editor extends javax.swing.JFrame {
     private javax.swing.JRadioButton op1;
     private javax.swing.JRadioButton op2;
     private javax.swing.JRadioButton opc_1;
+    private javax.swing.JRadioButton opc_2;
     private javax.swing.JRadioButton opc_3;
-    private javax.swing.JRadioButton opc_4;
     private javax.swing.JButton seleccionar;
     // End of variables declaration//GEN-END:variables
 }
