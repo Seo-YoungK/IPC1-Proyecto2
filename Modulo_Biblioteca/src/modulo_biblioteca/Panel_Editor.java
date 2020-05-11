@@ -22,10 +22,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Panel_Editor extends javax.swing.JFrame {
     
-    private BufferedImage input;
-    private BufferedImage output;
-    private BufferedImage segundoinput;
-    private File seleccion; 
+    private BufferedImage input;  //imagen original
+    private BufferedImage output;  //imagen trabajada
+    private BufferedImage segundoinput; //segund imagen
+    private File seleccion; //imagen seleccionada 
     
     private int R[][];
     private int G[][];
@@ -65,11 +65,11 @@ public class Panel_Editor extends javax.swing.JFrame {
               input = ImageIO.read(seleccion);
               height = input.getHeight();
               width = input.getWidth();
-          }  
+            }  
               seleccion = imagen.getSelectedFile();
               segundoinput = ImageIO.read(seleccion);
         }
-        
+            blanco_y_negro();
     }    
 
     public BufferedImage getinput(){
@@ -77,13 +77,11 @@ public class Panel_Editor extends javax.swing.JFrame {
     
     }
     
-    
-    
-    
-    public void blanco_y_negro(File imag){
-        int mediaPixel;
+
+    public void blanco_y_negro() throws IOException{
+        int resultado;
         Color colorAux; 
-         seleccionar();
+        /*seleccionar();*/
           
          monocromatico = new int[width][height];
          R = new int[width][height];
@@ -91,34 +89,81 @@ public class Panel_Editor extends javax.swing.JFrame {
          B = new int[width][height];
          
          
-          for(int x=0; x < width; x++){
+         for(int x=0; x < width; x++){
              for(int y=0; y< height; y++){
-              colorAux = new color   
-              Color color = new Color(imagen.getRGB(x, y));
-              int rojo = (int)(color.getRed()*0.2126);
-              int verde = (int)(color.getGreen()*0.7152);  
-              int azul = (int)(color.getBlue()*0.07122);
-              int total = rojo + verde + azul;  
-                 
-              Color monocromatico = new Color(total, total, total);
-              imagen.setRGB(x, y, monocromatico.getRGB());
-             }
-              
-          }
+              colorAux = new Color(input.getRGB(x,y)); 
+              R[x][y]= colorAux.getRed();
+              G[x][y]= colorAux.getGreen();
+              B[x][y]= colorAux.getBlue();
+              resultado= (int)((colorAux.getRed()*0.3) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0.11));
+              monocromatico [x][y] = resultado;
+
+            }
+        }
            
-          
-          try{
-               f= new File("C:\\Users\\karen\\Pictures\\Output.jpg");
-               ImageIO.write(imag, "jpg", f);
-          
-            }catch(IOException ex){  
-               ex.printStackTrace();
-            } 
-
-       }
-
-        
+    }
     
+    public void crearimagen(int [][] Imagen, int x, int y){
+        
+         try {
+             output = new BufferedImage(x,y, input.getType());
+            for (int i = 0; i<Imagen.length; i++){
+                for(int j=0; j<Imagen[0].length; j++){
+                 int RGB = Imagen[i][j]>>16 | Imagen[i][j]>>8 | Imagen[i][j];
+                 output.setRGB(i, j, new Color(RGB).getRGB());
+                 }
+            }
+    
+         }catch(Exception ex){    
+            ex.printStackTrace();
+        }     
+ 
+    }
+    
+      public BufferedImage getoutput(){
+        return output;    
+    }  
+
+    public BufferedImage getInput() {
+        return input;
+    }
+
+    public BufferedImage getOutput() {
+        return output;
+    }
+
+    public BufferedImage getSegundoinput() {
+        return segundoinput;
+    }
+
+    public File getSeleccion() {
+        return seleccion;
+    }
+
+    public int[][] getR() {
+        return R;
+    }
+
+    public int[][] getG() {
+        return G;
+    }
+
+    public int[][] getB() {
+        return B;
+    }
+
+    public int[][] getMonocromatico() {
+        return monocromatico;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -352,23 +397,14 @@ public class Panel_Editor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
+        try{
+            
+          seleccionar();
+        
+        }catch(IOException ex){
+        
+    }
 
-        try {
-            seleccionar();
-            this.lugarimagen.setIcon(new ImageIcon(this.getinput()));
-            /*input = ImageIO.read(new File(input.getSelectedFile().toString()));*/
-            /*ImageIcon n = new ImageIcon(input);     
-            ImageIcon l = new ImageIcon(n.getImage().getScaledInstance(lugarimagen.getWidth(), lugarimagen.getHeight(), Image.SCALE_DEFAULT));
-            this.lugarimagen.setIcon(l);*/
-             
-        }catch(IOException e){    
-            e.printStackTrace();
-        }
-
-
-
-
-          
     }//GEN-LAST:event_seleccionarActionPerformed
 
     private void ConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvertirActionPerformed
@@ -410,7 +446,7 @@ public class Panel_Editor extends javax.swing.JFrame {
                  if (op1.isSelected()){
                
                   //mensaje2 = "blanco y negro";     
-                  blanco_y_negro();
+                 
     
                  }else if (op2.isSelected()){
                 
