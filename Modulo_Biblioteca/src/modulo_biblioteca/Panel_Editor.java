@@ -99,14 +99,77 @@ public class Panel_Editor extends javax.swing.JFrame {
               int RGB = resultado<<16 | resultado<<8 | resultado;
               monocromatico [x][y] = resultado;
 
+              input.setRGB(x, y, RGB );
+            }
+
+        }
+ 
+    }
+    
+     public void verde() throws IOException{
+        int resultado;
+        Color colorAux; 
+        
+          
+         monocromatico = new int[width][height];
+         R = new int[width][height];
+         G = new int[width][height];
+         B = new int[width][height];
+         
+         
+         for(int x=0; x < width; x++){
+             for(int y=0; y< height; y++){
+              colorAux = new Color(input.getRGB(x,y)); 
+              R[x][y]= colorAux.getRed();
+              G[x][y]= colorAux.getGreen();
+              B[x][y]= colorAux.getBlue();
+              resultado= (int)((colorAux.getRed()*0) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0));
+              int RGB = resultado<<16 | resultado<<8 | 0;
+              monocromatico [x][y] = resultado;
               
               input.setRGB(x, y, RGB );
             }
+              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\verde.jpg");
+              ImageIO.write(input, "jpg", seleccion);
         }
+ 
          
+    }   
+    
+     public void azul() throws IOException{
+        int resultado;
+        Color colorAux; 
         
-           
-    }
+          
+         monocromatico = new int[width][height];
+         R = new int[width][height];
+         G = new int[width][height];
+         B = new int[width][height];
+         
+         
+        for(int x=0; x < width; x++){
+             for(int y=0; y< height; y++){
+              colorAux = new Color(input.getRGB(x,y)); 
+              R[x][y]= colorAux.getRed();
+              G[x][y]= colorAux.getGreen();
+              B[x][y]= colorAux.getBlue();
+              resultado= (int)((colorAux.getRed()*0.3) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0.11));
+              /*int RGB = resultado>>16 | resultado>>8 | resultado;*/
+              monocromatico [x][y] = resultado;
+              
+              input.setRGB(x, y, resultado);
+            }
+        }
+              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\azul.jpg");
+              ImageIO.write(input, "jpg", seleccion);
+        }
+ 
+        
+     
+     
+     
+     
+     
     
   /*  public void crearimagen(int [][] Imagen, int x, int y){
         
@@ -455,8 +518,19 @@ public class Panel_Editor extends javax.swing.JFrame {
                  
     
             }else if (op2.isSelected()){
+           /* try {
+                verde();
+            } catch (IOException ex) {
+                Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
                 
-                  //mensaje2 = "rojo, verde y azul";
+            try {
+                azul();
+            } catch (IOException ex) {
+                Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+           /* JOptionPane.showMessageDialog(null, "Operacion Finalizada");*/
             
             }else if (opc_3.isSelected()) {
             
