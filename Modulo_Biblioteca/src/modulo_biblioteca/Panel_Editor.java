@@ -5,7 +5,6 @@
  */
 package modulo_biblioteca;
 
-import java.awt.Image;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -115,7 +114,7 @@ public class Panel_Editor extends javax.swing.JFrame {
             }
     
          }catch(Exception ex){    
-            ex.printStackTrace();
+           
         }     
  
     }
@@ -355,15 +354,11 @@ public class Panel_Editor extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
                         .addComponent(opc_1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(opc_4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,7 +374,7 @@ public class Panel_Editor extends javax.swing.JFrame {
                 .addComponent(op2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Convertir2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -442,7 +437,7 @@ public class Panel_Editor extends javax.swing.JFrame {
                    
         String mensaje2;
             
-            try{
+
                  if (op1.isSelected()){
                
                   //mensaje2 = "blanco y negro";     
@@ -460,15 +455,9 @@ public class Panel_Editor extends javax.swing.JFrame {
                  }else{
                  // mensaje2 = "no selecciono nada"; 
 
-            }
+                }
             
-            //JOptionPane.showMessageDialog(null, mensaje2);
-            
-            } catch(Exception e){
-             
-                JOptionPane.showMessageDialog(null, "Seleccione una opcion");
-            
-            } 
+
     }//GEN-LAST:event_Convertir2ActionPerformed
 
     /**
