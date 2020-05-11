@@ -73,6 +73,7 @@ public class Biblioteca extends javax.swing.JFrame {
         agregarimagen = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Foto (adjuntat nombre de la foto)");
@@ -126,15 +127,15 @@ public class Biblioteca extends javax.swing.JFrame {
                     .addGroup(categoriasLayout.createSequentialGroup()
                         .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(categoriasLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                                .addComponent(anterior)
-                                .addGap(18, 18, 18))
-                            .addGroup(categoriasLayout.createSequentialGroup()
                                 .addGap(103, 103, 103)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE))
+                            .addGroup(categoriasLayout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(anterior)
+                                .addGap(18, 18, 18)))
                         .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox1, 0, 468, Short.MAX_VALUE)
                             .addComponent(lugarimagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -148,23 +149,26 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addComponent(usuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(jLabel2))
-                .addGap(21, 21, 21)
                 .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(categoriasLayout.createSequentialGroup()
-                            .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(42, 42, 42))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
-                            .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(233, 233, 233)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
-                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(235, 235, 235))))
+                    .addGroup(categoriasLayout.createSequentialGroup()
+                        .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                            .addComponent(jLabel2))
+                        .addGap(21, 21, 21)
+                        .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(categoriasLayout.createSequentialGroup()
+                                    .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(42, 42, 42))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
+                                    .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(233, 233, 233)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
+                                .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(235, 235, 235))))
+                    .addGroup(categoriasLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
@@ -198,7 +202,7 @@ public class Biblioteca extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenu2.setMaximumSize(new java.awt.Dimension(125, 32767));
         jMenu2.setOpaque(true);
-        jMenu2.setPreferredSize(new java.awt.Dimension(124, 19));
+        jMenu2.setPreferredSize(new java.awt.Dimension(120, 19));
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu2MouseClicked(evt);
@@ -212,7 +216,7 @@ public class Biblioteca extends javax.swing.JFrame {
         Agregar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Agregar.setMaximumSize(new java.awt.Dimension(150, 32767));
         Agregar.setOpaque(true);
-        Agregar.setPreferredSize(new java.awt.Dimension(150, 19));
+        Agregar.setPreferredSize(new java.awt.Dimension(130, 19));
         Agregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AgregarMouseClicked(evt);
@@ -237,6 +241,7 @@ public class Biblioteca extends javax.swing.JFrame {
         agregarimagen.setForeground(new java.awt.Color(255, 255, 255));
         agregarimagen.setText("Añadir a Categoría ");
         agregarimagen.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        agregarimagen.setMaximumSize(new java.awt.Dimension(140, 32767));
         agregarimagen.setOpaque(true);
         agregarimagen.setPreferredSize(new java.awt.Dimension(150, 19));
         agregarimagen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -252,9 +257,9 @@ public class Biblioteca extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu1.setMaximumSize(new java.awt.Dimension(100, 32767));
+        jMenu1.setMaximumSize(new java.awt.Dimension(90, 32767));
         jMenu1.setOpaque(true);
-        jMenu1.setPreferredSize(new java.awt.Dimension(100, 19));
+        jMenu1.setPreferredSize(new java.awt.Dimension(80, 19));
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu1MouseClicked(evt);
@@ -268,9 +273,9 @@ public class Biblioteca extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu3.setMaximumSize(new java.awt.Dimension(195, 32767));
+        jMenu3.setMaximumSize(new java.awt.Dimension(80, 32767));
         jMenu3.setOpaque(true);
-        jMenu3.setPreferredSize(new java.awt.Dimension(195, 19));
+        jMenu3.setPreferredSize(new java.awt.Dimension(45, 19));
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu3MouseClicked(evt);
@@ -278,13 +283,25 @@ public class Biblioteca extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBackground(new java.awt.Color(51, 51, 51));
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu4.setText("Ingresar al Convertidor");
+        jMenu4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenu4.setOpaque(true);
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(categorias, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
+            .addComponent(categorias, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,6 +420,12 @@ public class Biblioteca extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jMenu1MouseClicked
 
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+       Panel_Convertidor convertidor = new Panel_Convertidor();
+       convertidor.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jMenu4MouseClicked
+
  
     /**
      * @param args the command line arguments
@@ -454,6 +477,7 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lugarimagen;
