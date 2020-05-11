@@ -111,7 +111,7 @@ public class Panel_Editor extends javax.swing.JFrame {
         Color colorAux; 
         
           
-         monocromatico = new int[width][height];
+         monocromatico = new int[width][height]; //matriz donde se almacenaran los pixeles blanco y negro 
          R = new int[width][height];
          G = new int[width][height];
          B = new int[width][height];
@@ -123,13 +123,13 @@ public class Panel_Editor extends javax.swing.JFrame {
               R[x][y]= colorAux.getRed();
               G[x][y]= colorAux.getGreen();
               B[x][y]= colorAux.getBlue();
-              resultado= (int)((colorAux.getRed()*0) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0));
-              int RGB = resultado<<16 | resultado<<8 | 0;
+              resultado= (int)((colorAux.getRed()*0) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0)); // R=0, B=0, G=0.59, y es 255 A
+              int RGB = resultado<<16 | resultado<<8 | 0;  //parametros de los colores
               monocromatico [x][y] = resultado;
               
               input.setRGB(x, y, RGB );
             }
-              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\verde.jpg");
+              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\verde.jpg"); //ruta donde se colocara la imagen
               ImageIO.write(input, "jpg", seleccion);
         }
  
@@ -154,87 +154,49 @@ public class Panel_Editor extends javax.swing.JFrame {
               G[x][y]= colorAux.getGreen();
               B[x][y]= colorAux.getBlue();
               resultado= (int)((colorAux.getRed()*0.3) + (colorAux.getGreen()*0.59) + (colorAux.getBlue()*0.11));
-              /*int RGB = resultado>>16 | resultado>>8 | resultado;*/
               monocromatico [x][y] = resultado;
               
               input.setRGB(x, y, resultado);
             }
         }
-              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\azul.jpg");
+              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\azul.jpg"); //ruta donde se colocara la imagen
               ImageIO.write(input, "jpg", seleccion);
         }
  
+
+     public void rojo() throws IOException{
+        int resultado;
+        Color colorAux; 
         
-     
-     
-     
-     
-     
-    
-  /*  public void crearimagen(int [][] Imagen, int x, int y){
-        
-         try {
-             output = new BufferedImage(x,y, input.getType());
-            for (int i = 0; i<Imagen.length; i++){
-                for(int j=0; j<Imagen[0].length; j++){
-                 int RGB = Imagen[i][j]>>16 | Imagen[i][j]>>8 | Imagen[i][j];
-                 output.setRGB(i, j, new Color(RGB).getRGB());
-                 }
+          
+         monocromatico = new int[width][height]; //matriz donde se almacenaran los pixeles blanco y negro 
+         R = new int[width][height];
+         G = new int[width][height];
+         B = new int[width][height];
+         
+         
+         for(int x=0; x < width; x++){
+             for(int y=0; y< height; y++){
+              colorAux = new Color(input.getRGB(x,y)); 
+              R[x][y]= colorAux.getRed();
+              G[x][y]= colorAux.getGreen();
+              B[x][y]= colorAux.getBlue();
+              resultado= (int)((colorAux.getRed()*0.3) + (colorAux.getGreen()*0) + (colorAux.getBlue()*0)); // R=0.3, B=, G=, y es 255 A
+              /*int RGB = resultado<<16 | resultado<<8 |0;  //parametros de los colores*/
+              monocromatico [x][y] = resultado;
+              
+              input.setRGB(x, y, resultado );
             }
-    
-
-         }catch(IOException ex){    
-           
-        }     
+              seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\rojo.jpg"); //ruta donde se colocara la imagen
+              ImageIO.write(input, "jpg", seleccion);
+        }
  
-    }*/
-    
-    /* public BufferedImage getoutput(){
-        return output;    
-    }  
-
-    public BufferedImage getInput() {
-        return input;
-    }
-
-    public BufferedImage getOutput() {
-        return output;
-    }
-
-    public BufferedImage getSegundoinput() {
-        return segundoinput;
-    }
-
-    public File getSeleccion() {
-        return seleccion;
-    }
-
-    public int[][] getR() {
-        return R;
-    }
-
-    public int[][] getG() {
-        return G;
-    }
-
-    public int[][] getB() {
-        return B;
-    }
-
-    public int[][] getMonocromatico() {
-        return monocromatico;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }*/
-
+         
+    }     
+     
+     
+     
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -504,33 +466,40 @@ public class Panel_Editor extends javax.swing.JFrame {
         String mensaje2;
             
 
-            if (op1.isSelected()){
+         if (op1.isSelected()){
                
             try {
-                blanco_y_negro();
-                seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\output.jpg");
+                blanco_y_negro(); //metodo para obtener la imagen en blanco y negro
+                seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\output.jpg");  //ruta donde se colocara la imagen
                 ImageIO.write(input, "jpg", seleccion);
-                
-                
-             }catch (IOException ex) {
+            }
+            
+            catch (IOException ex) {
                 Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
             }
                  
     
-            }else if (op2.isSelected()){
-           /* try {
-                verde();
+        }else if (op2.isSelected()){
+                
+            /*try {
+                verde();  //metodo para obtener la imagen en verde
             } catch (IOException ex) {
-                Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+                 Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 
             try {
-                azul();
+                azul(); //metodo para obtener la imagen en azul
+            } catch (IOException ex) {
+                Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+                 }*/
+                 
+            try {
+                rojo();
             } catch (IOException ex) {
                 Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-           /* JOptionPane.showMessageDialog(null, "Operacion Finalizada");*/
+             JOptionPane.showMessageDialog(null, "Operacion Finalizada");
             
             }else if (opc_3.isSelected()) {
             
