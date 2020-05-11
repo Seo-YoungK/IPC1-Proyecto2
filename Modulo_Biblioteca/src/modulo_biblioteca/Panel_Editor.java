@@ -46,6 +46,7 @@ public class Panel_Editor extends javax.swing.JFrame {
         botones.add(opc_3);
         botones2.add(op1);
         botones2.add(op2);
+        botones2.add(op3);
     }
 
     /*INICIO DE METODOS DE TRANSFORMACION*/
@@ -208,8 +209,68 @@ public class Panel_Editor extends javax.swing.JFrame {
 
      }
           
+     public void Copiar() throws IOException{
+   
+        seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\JPGE(1).jpg"); //ruta donde se colocara la imagen
+        ImageIO.write(input, "jpg", seleccion);       
+
+     }     
      
-     
+
+    public void sepia() throws IOException{
+        
+        Color colorAux; 
+        
+          
+         monocromatico = new int[width][height];
+         R = new int[width][height];
+         G = new int[width][height];
+         B = new int[width][height];
+         
+         
+         for(int x=0; x < width; x++){
+             for(int y=0; y< height; y++){
+              int p = input.getRGB(x, y);
+              colorAux = new Color(input.getRGB(x,y)); 
+              R[x][y]= colorAux.getRed();
+              G[x][y]= colorAux.getGreen();
+              B[x][y]= colorAux.getBlue();
+              int resultado1= (int)((colorAux.getRed()*0.393) + (colorAux.getGreen()*0.769) + (colorAux.getBlue()*0.189));
+              int resultado2= (int)((colorAux.getRed()*0.349) + (colorAux.getGreen()*0.686) + (colorAux.getBlue()*0.168));
+              int resultado3= (int)((colorAux.getRed()*0.272) + (colorAux.getGreen()*0.534) + (colorAux.getBlue()*0.131));
+              /*monocromatico [x][y] = resultado;*/
+                if(resultado1>255 ){
+                  R[x][y] = 255;
+
+                }else{
+                  R[x][y] = resultado1;
+                }
+              
+                if(resultado2>255 ){
+                  G[x][y] = 255;
+
+                }else{
+                  G[x][y] = resultado2;
+              
+                }
+                if(resultado3>255 ){
+                  B[x][y] = 255;
+
+                }else{
+                  B[x][y] = resultado3;
+              
+                }              
+
+                int RGB = R[x][y]<<16 | G[x][y]<<8 | B[x][y];
+                input.setRGB(x, y, RGB );
+            
+              
+            }
+
+        }
+                seleccion = new File("C:\\Users\\karen\\Pictures\\IPC IMAGENES\\sepia.jpg"); //ruta donde se colocara la imagen
+                ImageIO.write(input, "jpg", seleccion);
+    }     
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -240,6 +301,7 @@ public class Panel_Editor extends javax.swing.JFrame {
         op1 = new javax.swing.JRadioButton();
         opc_2 = new javax.swing.JRadioButton();
         Convertir2 = new javax.swing.JButton();
+        op3 = new javax.swing.JRadioButton();
 
         jLabel5.setBackground(new java.awt.Color(51, 51, 51));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -249,6 +311,7 @@ public class Panel_Editor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setToolTipText("Editor de Imagenes");
 
         lugarimagen.setBackground(new java.awt.Color(255, 255, 255));
         lugarimagen.setForeground(new java.awt.Color(255, 255, 255));
@@ -334,6 +397,11 @@ public class Panel_Editor extends javax.swing.JFrame {
             }
         });
 
+        op3.setBackground(new java.awt.Color(51, 51, 51));
+        op3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        op3.setForeground(new java.awt.Color(255, 255, 255));
+        op3.setText("      Sepia");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -382,7 +450,8 @@ public class Panel_Editor extends javax.swing.JFrame {
                             .addComponent(Convertir2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(op2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(op1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(op1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(op3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -416,13 +485,15 @@ public class Panel_Editor extends javax.swing.JFrame {
                         .addComponent(Convertir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
                         .addComponent(jLabel7)
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
                         .addComponent(op1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(op2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(op2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(op3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Convertir2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -433,7 +504,9 @@ public class Panel_Editor extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -478,10 +551,18 @@ public class Panel_Editor extends javax.swing.JFrame {
                     Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
                 }
             
-                  JOptionPane.showMessageDialog(null, "Operacion Finalizada");
+                  
             
             }else if (opc_3.isSelected()) {
-
+            try {
+                Copiar();
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+              JOptionPane.showMessageDialog(null, "Operacion Finalizada");
+             
             }else{
                  JOptionPane.showMessageDialog(null,"Seleccione una opcion");
 
@@ -524,13 +605,17 @@ public class Panel_Editor extends javax.swing.JFrame {
                 Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+             
+            
+            }else if (op3.isSelected()) {
+             try {
+                 sepia();
+             } catch (IOException ex) {
+                 Logger.getLogger(Panel_Editor.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             
              JOptionPane.showMessageDialog(null, "Operacion Finalizada");
-            
-            }else if (opc_3.isSelected()) {
-            
-                  // mensaje2 = "copiar";
-                  
-                  
+             
             }else{
                  JOptionPane.showMessageDialog(null, "Seleccione una opcion");
 
@@ -590,6 +675,7 @@ public class Panel_Editor extends javax.swing.JFrame {
     private javax.swing.JLabel lugarimagen;
     private javax.swing.JRadioButton op1;
     private javax.swing.JRadioButton op2;
+    private javax.swing.JRadioButton op3;
     private javax.swing.JRadioButton opc_1;
     private javax.swing.JRadioButton opc_2;
     private javax.swing.JRadioButton opc_3;
