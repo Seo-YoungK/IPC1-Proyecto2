@@ -11,6 +11,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -23,9 +25,12 @@ import javax.swing.JOptionPane;
  */
 public class Biblioteca extends javax.swing.JFrame {
     
-    DefaultListModel modeloLista;
+    private DefaultListModel modeloLista;
     ImageIcon img[] = new ImageIcon[5];
-    
+    public File seleccion; //imagen seleccionada 
+    public BufferedImage input;  //imagen original
+    public int height;
+    public int width;
     
     
     private int contador;
@@ -131,7 +136,7 @@ public class Biblioteca extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE))
                             .addGroup(categoriasLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
+                                .addGap(36, 36, 36)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(anterior)
@@ -148,27 +153,25 @@ public class Biblioteca extends javax.swing.JFrame {
             .addGroup(categoriasLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(usuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1)
+                    .addComponent(jLabel2))
+                .addGap(21, 21, 21)
                 .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(categoriasLayout.createSequentialGroup()
-                        .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                            .addComponent(jLabel2))
-                        .addGap(21, 21, 21)
-                        .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(categoriasLayout.createSequentialGroup()
-                                    .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(42, 42, 42))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
-                                    .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(233, 233, 233)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
-                                .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(235, 235, 235))))
+                    .addGroup(categoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(categoriasLayout.createSequentialGroup()
+                            .addComponent(lugarimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(42, 42, 42))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
+                            .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(233, 233, 233)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriasLayout.createSequentialGroup()
+                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(235, 235, 235))
                     .addGroup(categoriasLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
@@ -324,34 +327,34 @@ public class Biblioteca extends javax.swing.JFrame {
 
         JFileChooser imagen = new JFileChooser();
         imagen.setDialogTitle("Buscar en:" );
+        int estado = imagen.showOpenDialog(null);
         
-        if(imagen.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
-            //File archivo = new File(imagen.getSelectedFile().toString());
-              
-            /*rsscalelabel.RSScaleLabel.setScaleLabel(lugarimagen,imagen.getSelectedFile().toString());*/
 
-          
-        BufferedImage imag =  null;
+        if(estado== JFileChooser.APPROVE_OPTION){
+              if(input == null){
+              seleccion = imagen.getSelectedFile();
+                  try {
+                      input = ImageIO.read(seleccion);
+                  } catch (IOException ex) {
+                      Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+              height = input.getHeight();
+              width = input.getWidth();
+            }  
+
         
-        try {
-            
-            imag = ImageIO.read(new File(imagen.getSelectedFile().toString()));
-            
-        }catch(IOException e){    
-            
-        }
         
         
-        for(int i=1; i<img.length; i++ ){
+        
+        for(int i=1; i<img.length; i++ ){  //obteniendo la longitud de las imagenes
    
-        ImageIcon n = new ImageIcon(imag);     
+        ImageIcon n = new ImageIcon(input);     
         ImageIcon l = new ImageIcon(n.getImage().getScaledInstance(lugarimagen.getWidth(), lugarimagen.getHeight(), Image.SCALE_DEFAULT));
         this.lugarimagen.setIcon(l);
         
-        img[i] = img[getResource(l)];   
-        
-        
+          img[i] = img[1];  
           }
+         
         }
     
     }//GEN-LAST:event_abririmagenMouseClicked

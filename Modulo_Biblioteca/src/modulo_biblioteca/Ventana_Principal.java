@@ -181,6 +181,16 @@ public class Ventana_Principal extends javax.swing.JFrame {
         //almacenamiento de datos de usuarios
 
         this.usuario = this.user.getText();
+        
+        Lista_Simple_Usuarios usuarios = new  Lista_Simple_Usuarios();
+        usuarios.add(this.usuario);
+        
+        
+        if(this.user.getText().equals(this.usuario)){
+            
+           
+        }
+        
 
         /* Lista_Simple simple = new Lista_Simple();*/
 
@@ -196,9 +206,11 @@ public class Ventana_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Panel_Convertidor panelC = new Panel_Convertidor ();
+        panelC.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+ 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Panel_Editor panel = new Panel_Editor();
         panel.setVisible(true);

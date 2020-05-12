@@ -178,7 +178,7 @@ public class Panel_Editor extends javax.swing.JFrame {
          
          for(int x=0; x < width; x++){
              for(int y=0; y< height; y++){
-              colorAux = new Color(input.getRGB(x,y)); 
+              colorAux = new Color(input.getRGB(x,y)); //defi
               R[x][y]= colorAux.getRed();
               G[x][y]= colorAux.getGreen();
               B[x][y]= colorAux.getBlue();

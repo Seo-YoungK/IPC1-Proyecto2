@@ -17,8 +17,7 @@ private Nodos1 siguiente;
         siguiente = null;      //la lista no contiene elementos aun. //No es necesario colocar que es nulo, porque el siguiente sera nulo. 
     }
 
-    
-    
+
     public String getUsuario() {
         return usuario;
     }
